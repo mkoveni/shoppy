@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../store/store';
-import { LOGIN, GET_USER, LOGOUT_ROUTE } from '../routes/routes';
+import { LOGIN, GET_USER, LOGOUT_ROUTE, CHECK_EMAIL, REGISTER_USER } from '../routes/routes';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
 import { SET_USER, SET_AUTH_STATE } from '../store/auth/actions';
@@ -71,5 +71,14 @@ export class AuthService {
    this.http.post(LOGOUT_ROUTE, {});
   }
 
+  validateEmail(email: string) {
+
+    return this.http.get(CHECK_EMAIL + '/' + email).map(res => res['status']);
+  }
+
+  register(payload) {
+
+    return this.http.post(REGISTER_USER, payload);
+  }
 
 }

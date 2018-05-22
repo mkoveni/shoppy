@@ -29,11 +29,17 @@ class ClientController extends Controller
     public function show(Request $request) {
 
         $client  = $this->clientRepository
-                        ->withCriteria(new EagerLoad('transactions.product'))
                         ->find($request->user()->id);
         
         return new ClientResource($client);
 
+    }
+
+    public function findByEmail(string $email) {
+
+        $client = $this->clientRepository->findFirst('email', $email);
+
+        return new ClientResource($client);
     }
 
 }

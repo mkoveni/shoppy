@@ -9,9 +9,22 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginFormRequest;
 use App\Http\Resources\Client\ClientResource;
 use App\Http\Requests\Client\CreateClientRequest;
+use App\Repository\Interfaces\ClientRepository;
 
 class AuthController extends Controller
 {
+    /**
+     * client repository instance
+     *
+     * @var ClientRepository
+     */
+    protected $repository;
+
+    public function __construct(ClientRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function authenticate(LoginFormRequest $request)
     {
       if($token = $this->generateToken($request->only(['email', 'password'])))
@@ -24,7 +37,7 @@ class AuthController extends Controller
 
     public function register(CreateClientRequest $request)
     {
-        $client = Client::create([
+        $client = $this->repository->create([
             'first_name' =>$request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
@@ -40,6 +53,17 @@ class AuthController extends Controller
     }
 
 
+    public function emailExists(string $email) {
+
+        $client = $this->repository->findFirst('email', $email);
+
+        if($client) {
+
+            return response()->json(['status' => 422], 200);
+        }
+
+        return response()->json(['status' => 200], 200);
+    }
 
     protected function guard()
     {

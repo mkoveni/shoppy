@@ -4,24 +4,26 @@
       <div class="card-header">Sign up</div>
 
       <div class="card-body">
-        <form novalidate>
+        <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
 
           <div class="form-group row">
             <label for="first_name" class="col-sm-4 col-form-label text-md-right">First Name(s)</label>
             <div class="col-md-6">
-              <input id="text" type="text" class="form-control" required autofocus>
-              <span class="invalid-feedback">
-                <strong>validation error will be here</strong>
+              <input id="first_name" type="text" name="first_name" formControlName="first_name"
+               class="form-control" [ngClass]="{'is-invalid': error('first_name')}">
+              <span class="invalid-feedback" *ngIf="error('first_name')">
+                <strong>First Name is required and must at least be 3 characters long</strong>
               </span>
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="last_name" class="col-sm-4 col-form-label text-md-right">Last Name</label>
+            <label for="first_name" class="col-sm-4 col-form-label text-md-right">Last Name</label>
             <div class="col-md-6">
-              <input id="text" type="text" class="form-control" required autofocus>
-              <span class="invalid-feedback">
-                <strong>validation error will be here</strong>
+              <input id="last_name" type="text" name="last_name" formControlName="last_name"
+               class="form-control" [ngClass]="{'is-invalid': error('last_name')}">
+              <span class="invalid-feedback" *ngIf="error('last_name')">
+                <strong>Last Name is required and must at least be 3 characters long</strong>
               </span>
             </div>
           </div>
@@ -29,9 +31,11 @@
           <div class="form-group row">
             <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
             <div class="col-md-6">
-              <input id="email" type="email" class="form-control" required autofocus>
-              <span class="invalid-feedback">
-                <strong>error will be here</strong>
+              <input id="email" type="email" name="email" formControlName="email"
+               class="form-control" [ngClass]="{'is-invalid': error('email')}">
+              <span class="invalid-feedback" *ngIf="error('email')">
+                <strong *ngIf="getInputErrors('email')?.email">Please enter a valid email address (e.g simon@domain.com)</strong>
+                <strong *ngIf="getInputErrors('email')?.EmailExists">This email address is not available</strong>
               </span>
             </div>
           </div>
@@ -39,18 +43,18 @@
           <div class="form-group row">
             <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
             <div class="col-md-6">
-              <input id="password" type="password" class="form-control" name="password" required>
-              <span class="invalid-feedback" >
-                <strong>something</strong>
+              <input id="password" type="password" name="password" formControlName="password"
+              class="form-control" [ngClass]="{'is-invalid': error('password')}">
+              <span class="invalid-feedback" *ngIf="error('password')">
+                <strong>Password must at least be 6 characters in length</strong>
               </span>
-
             </div>
           </div>
 
 
           <div class="form-group row mb-0">
             <div class="col-md-8 offset-md-4">
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
                 Sign up
               </button>
             </div>

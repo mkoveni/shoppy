@@ -18,4 +18,7 @@ interface Repository
     public function all();
 
     public function findWhere($field, $value);
+
+    public function findFirst($field, $value);
+    
 }

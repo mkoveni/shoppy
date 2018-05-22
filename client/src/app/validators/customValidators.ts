@@ -1,4 +1,6 @@
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { AuthService } from '../services/auth.service';
 
 
 export class CustomValidators
@@ -16,3 +18,5 @@ export class CustomValidators
         return null;
     }
 }
+
+

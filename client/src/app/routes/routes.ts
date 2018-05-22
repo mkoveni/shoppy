@@ -2,7 +2,7 @@ const BASE_URL = 'http://localhost:8000/api/';
 
 export const ALL_PRODUCTS = BASE_URL + 'products/index';
 
-export const CHECK_EMAIL = BASE_URL + 'users/checkEmail';
+export const CHECK_EMAIL = BASE_URL + 'auth/validate/email';
 
 export const REGISTER_USER = BASE_URL + 'auth/register';
 

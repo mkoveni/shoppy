@@ -44,6 +44,11 @@ abstract class AbstractEloquentRepository implements Repository, CriteriaInterfa
         return $this->entity->where($field, $value)->get();
     }
 
+    public function findFirst($field, $value)
+    {
+        return $this->entity->where($field, $value)->first();
+    }
+
     public function all()
     {
         return $this->entity->get();

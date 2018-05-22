@@ -16,6 +16,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './guards/interceptors';
 import { ProfileModule } from './profile/profile.module';
 import { TransactionService } from './services/transaction.service';
+import { UniqueValidationProvider } from './validators/providers';
 
 
 
@@ -44,7 +45,7 @@ const appRoutes: Routes = [
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
     multi: true
-  }, ProductService, TransactionService],
+  }, ProductService, TransactionService, UniqueValidationProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule {

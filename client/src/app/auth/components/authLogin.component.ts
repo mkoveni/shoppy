@@ -1,5 +1,5 @@
 import { select } from 'ng2-redux';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../base.component';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
@@ -12,13 +12,17 @@ import { Router } from '@angular/router';
     templateUrl: './auth.login.component.html',
     styleUrls: ['./auth.login.component.css']
 })
-export class AuthLoginComponent extends BaseComponent
+export class AuthLoginComponent extends BaseComponent implements OnInit
 {
 
     constructor(formBuilder: FormBuilder, private auth: AuthService, private router: Router) {
       super(formBuilder);
     }
 
+    ngOnInit() {
+
+      this.initialForm();
+    }
     getFields() {
 
       return {
@@ -26,6 +30,8 @@ export class AuthLoginComponent extends BaseComponent
         password: [null, Validators.required]
       };
     }
+
+
 
     submit() {
 
@@ -42,7 +48,10 @@ export class AuthLoginComponent extends BaseComponent
             localStorage.removeItem(INTENDED_ROUTE);
 
             this.router.navigateByUrl(route);
+            return;
         }
       });
+
+      this.router.navigateByUrl('/profile/account');
     }
 }

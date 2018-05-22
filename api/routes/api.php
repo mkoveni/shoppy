@@ -5,17 +5,13 @@ use Illuminate\Http\Request;
 
 Route::post('/auth/register', 'Api\\AuthController@register')->name('signup');
 Route::post('/auth/login', 'Api\\AuthController@authenticate')->name('signin');
+Route::get('/auth/validate/email/{email}', 'Api\\AuthController@emailExists');
 
 Route::get('/products/index', 'Api\\ProductController@index');
 
 Route::group(['namespace' => 'Api','middleware' => ['auth:client']], function(){
 
     Route::get('/client', 'ClientController@show');
-
-    Route::post('/purchase', 'ClientController@purchase');
-
-    Route::post('/account/topup', 'ClientController@topup');
-
     
 
     Route::group(['prefix' => 'transactions'], function(){

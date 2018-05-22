@@ -7,7 +7,7 @@
           <div class="card-header bg-primary text-light">Dashboard</div>
 
           <div class="card-body">
-              <p>Welcome <strong>{{ (user | async).first_name }} {{ (user | async).last_name }}!</strong></p>
+              <p>Welcome <strong>{{ (user | async)?.first_name }} {{ (user | async)?.last_name }}!</strong></p>
           </div>
       </div>
   </div>

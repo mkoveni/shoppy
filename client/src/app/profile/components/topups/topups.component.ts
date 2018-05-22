@@ -23,6 +23,8 @@ export class TopupsComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
 
+    this.initialForm();
+
     this.transactService.getTopupType().subscribe(res => {
       this.type = res;
         console.log(this.type);
