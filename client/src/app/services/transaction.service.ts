@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 
 export class TransactionService {
-
   constructor(private http: HttpClient) { }
 
   getPurchaseType() {
@@ -22,7 +21,12 @@ export class TransactionService {
 
     return this.http.post(CREATE_TRANSACTION, {
       amount: amount,
-      transaction_type_id: typeId
+      transaction_type_id: typeId,
+      client_id: userId
     });
+  }
+
+  purchase(payload) {
+    return this.http.post(CREATE_TRANSACTION, payload);
   }
 }

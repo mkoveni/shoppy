@@ -8,21 +8,27 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './shop/shop.component';
 import { ProductComponent } from './product/product.component';
-import {ProductService} from './services/product.service';
-import {NgRedux, NgReduxModule, DevToolsExtension} from 'ng2-redux';
-import {IAppState, INITIAL_STATE, rootReducer} from './store/store';
+import { ProductService } from './services/product.service';
+import { NgRedux, NgReduxModule, DevToolsExtension } from 'ng2-redux';
+import { IAppState, INITIAL_STATE, rootReducer } from './store/store';
 import { RouterModule, Routes } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './guards/interceptors';
 import { ProfileModule } from './profile/profile.module';
 import { TransactionService } from './services/transaction.service';
 import { UniqueValidationProvider } from './validators/providers';
+import { AuthenticatedGuard } from './guards/guards';
 
 
 
 const appRoutes: Routes = [
-  {path: 'shop', component: HomeComponent},
-  {path: '', redirectTo: '/shop', pathMatch: 'full'}
+  { path: 'shop', component: HomeComponent },
+  { path: '', redirectTo: '/shop', pathMatch: 'full' },
+  {
+    path: 'shop/buy/product/:id',
+    component: ProductComponent,
+    canActivate:[AuthenticatedGuard]
+  }
 ];
 @NgModule({
   declarations: [
@@ -32,7 +38,7 @@ const appRoutes: Routes = [
     ProductComponent
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     FormsModule,
     HttpModule,
     NgReduxModule,
@@ -41,7 +47,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
 
   ],
-  providers: [ {
+  providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
     multi: true

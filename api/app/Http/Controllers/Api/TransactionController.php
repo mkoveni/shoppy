@@ -52,8 +52,10 @@ class TransactionController extends Controller
 
         $transaction = $this->repository->create([
             'transaction_type_id' => $request->transaction_type_id,
-            'client_id' => $request->user()->id,
-            'amount' => $request->amount
+            'client_id' => $request->client_id,
+            'amount' => $request->amount,
+            'discount' => $request->discount ?? 0,
+            'product_id' => $request->product_id ?? null
         ]);
 
         event(new TransactionMade($transaction));
