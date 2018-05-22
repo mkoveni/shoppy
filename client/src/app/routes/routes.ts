@@ -21,5 +21,7 @@ export const LOGOUT_ROUTE = BASE_URL + 'auth/logout';
  export const PURCHASE_TYPE = BASE_URL + 'transaction_types/purchase';
  export const TOPUP_TYPE = BASE_URL + 'transaction_types/topup';
 
+ export const FOR_TYPE = BASE_URL + 'transactions/type';
+
  export const CREATE_TRANSACTION = BASE_URL + 'transactions/store';
 

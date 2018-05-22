@@ -7,6 +7,8 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { AuthenticatedGuard } from '../guards/guards';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { TopupHistoryComponent } from './components/topup-history/topup-history.component';
+import { PurchaseHistoryComponent } from './components/purchase--history/purchase--history.component';
 
 @NgModule({
   imports: [
@@ -25,12 +27,22 @@ import { SidebarComponent } from './sidebar/sidebar.component';
         path: 'profile/transactions',
         component: TransactionsComponent,
         canActivate: [AuthenticatedGuard]
+      },
+      {
+        path: 'profile/history/purchase',
+        component: PurchaseHistoryComponent,
+        canActivate: [AuthenticatedGuard]
+      },
+      {
+        path: 'profile/history/topup',
+        component: TopupHistoryComponent,
+        canActivate: [AuthenticatedGuard]
       }
     ]),
 
     SharedModule
   ],
-  declarations: [AccountComponent, TransactionsComponent, TopupsComponent, SidebarComponent],
+  declarations: [AccountComponent, TransactionsComponent, TopupsComponent, SidebarComponent, TopupHistoryComponent, PurchaseHistoryComponent],
   exports: [SharedModule, RouterModule]
 })
 export class ProfileModule { }

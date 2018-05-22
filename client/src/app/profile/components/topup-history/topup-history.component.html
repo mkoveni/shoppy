@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-3">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-9">
+    <div class="card">
+      <div class="card-header bg-primary text-light">Topup History</div>
+
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Transaction Id</th>
+              <th>Amount</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let transaction of transactions">
+              <td>{{ transaction.id }}</td>
+              <td>R{{ transaction.amount }}</td>
+              <td>{{ transaction.date }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>

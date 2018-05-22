@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Transaction;
+use Illuminate\Http\Request;
 use const App\TRANSACTION_TOPUP;
 use App\Http\Controllers\Controller;
 use App\Events\Client\TransactionMade;
 use App\Repository\Interfaces\TransactionRepository;
 use App\Http\Resources\Transaction\TransactionResource;
 use App\Http\Requests\Transaction\CreateTransactionRequest;
+use App\Repository\Implementation\Eloquent\Criteria\ForUser;
 use App\Repository\Implementation\Eloquent\Criteria\EagerLoad;
 use App\Http\Resources\Transaction\TransactionCollectionResource;
 
@@ -61,6 +63,15 @@ class TransactionController extends Controller
         event(new TransactionMade($transaction));
 
         return new TransactionResource($transaction);
+    }
+
+    public function forType(int $id, Request $request) {
+
+        $transactions = $this->repository
+                    ->withCriteria(new ForUser($request->user(), 'client_id'))
+                        ->findWhere('transaction_type_id', $id);
+
+        return TransactionResource::collection($transactions);
     }
 
 }

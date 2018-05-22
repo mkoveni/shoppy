@@ -20,6 +20,8 @@ export class AuthenticatedGuard implements CanActivate {
 
           localStorage.setItem(INTENDED_ROUTE, state.url);
 
+          console.log(state.url)
+
           this.router.navigateByUrl('/login');
 
           return false;

@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from './product';
 import { select } from 'ng2-redux';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/single';
 import { User, INITIAL_USER_STATE } from '../store/auth/store';
 import { INITIAL_PRODUCT_STATE } from '../store/shop/store';
 import { TransactionService } from '../services/transaction.service';
+import { MessageService } from '../services/message.service';
 
 
 @Component({
@@ -25,7 +25,8 @@ export class ProductComponent implements OnInit {
 
   type: {};
 
-  constructor(private route: ActivatedRoute, private transactionService: TransactionService) { }
+  constructor(private route: ActivatedRoute, private transactionService: TransactionService,
+       private message: MessageService, private router: Router) { }
 
   ngOnInit() {
 
@@ -87,7 +88,13 @@ export class ProductComponent implements OnInit {
       discount: product.discount
 
     }).subscribe(res => {
-      console.log(res);
+
+        this.transactionService.deductUserCredit(res['data']['amount']);
+
+        this.message.success('Hooray!', 'Your purchase was successful...');
+
+        this.router.navigateByUrl('/profile/history/purchase');
+
     });
 
   }
