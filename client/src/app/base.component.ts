@@ -29,4 +29,5 @@ export abstract class BaseComponent {
   initialForm() {
     this.form = this.builder.group(this.getFields());
   }
+
 }

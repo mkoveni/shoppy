@@ -6,6 +6,7 @@ import { select } from 'ng2-redux';
 import 'rxjs/add/operator/single';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { User } from '../../../store/auth/store';
+import { MessageService } from '../../../services/message.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class TopupsComponent extends BaseComponent implements OnInit {
 
   type: {};
 
-  constructor(builder: FormBuilder, private transactService: TransactionService) {
+  constructor(builder: FormBuilder, private transactService: TransactionService,
+      private message: MessageService) {
     super(builder);
    }
 
@@ -31,16 +33,23 @@ export class TopupsComponent extends BaseComponent implements OnInit {
 
     this.user.subscribe(user => this.authUser.next(user));
 
-    this.transactService.getTopupType().subscribe(res => {
-      this.type = res;
-        console.log(this.type);
-    });
+    this.transactService.getTopupType().subscribe(res => this.type = res);
   }
 
   submit() {
 
     this.transactService.topup(this.input('amount'), this.type['id'], this.authUser.getValue().id)
-      .subscribe(res => console.log(res));
+      .subscribe(res => {
+        // dispatch an action to reduce the user's credit amount
+        this.transactService.topupUserCredit(res['data']['amount']);
+
+        // toast a message
+        this.message.success('Hooray!', 'your transaction was successfully...');
+
+        // reset the input field
+        this.form.reset();
+
+      }, error => this.message.error('Error', 'Something went wrong, we could not process your transaction...'));
   }
 
   getFields() {

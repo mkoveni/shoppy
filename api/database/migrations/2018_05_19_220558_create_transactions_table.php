@@ -19,7 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('transaction_type_id')->unsigned();
             $table->integer('product_id')->nullable()->unsigned();
             $table->double('amount', 8, 2);
-            $table->double('discount', 8, 2)->default(0);
+            $table->double('discount', 8, 2)->nullable();
             
 
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');

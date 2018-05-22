@@ -19,6 +19,7 @@ Route::group(['namespace' => 'Api','middleware' => ['auth:client']], function(){
         Route::get('/show/{id}', 'TransactionController@show');
 
         Route::get('/index', 'TransactionController@index');
+        Route::get('/type/{id}', 'TransactionController@forType');
 
         Route::post('/store', 'TransactionController@store');
     });

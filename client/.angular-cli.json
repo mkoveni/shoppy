@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "assets/app.css"
+        "assets/app.css",
+        "assets/toasty-bootstrap.css"
       ],
       "scripts": [
 

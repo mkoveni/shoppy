@@ -18,6 +18,7 @@ import { ProfileModule } from './profile/profile.module';
 import { TransactionService } from './services/transaction.service';
 import { UniqueValidationProvider } from './validators/providers';
 import { AuthenticatedGuard } from './guards/guards';
+import { SharedModule } from './shared/shared.module';
 
 
 
@@ -27,7 +28,7 @@ const appRoutes: Routes = [
   {
     path: 'shop/buy/product/:id',
     component: ProductComponent,
-    canActivate:[AuthenticatedGuard]
+    canActivate: [AuthenticatedGuard]
   }
 ];
 @NgModule({
@@ -42,9 +43,11 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     NgReduxModule,
+    SharedModule,
     AuthModule,
     ProfileModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+
 
   ],
   providers: [{

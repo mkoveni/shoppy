@@ -1,5 +1,3 @@
-import { Product } from './../product/product';
-import { ProductService } from './../services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { select } from 'ng2-redux';
 
@@ -10,6 +8,8 @@ import { select } from 'ng2-redux';
 })
 export class HomeComponent implements OnInit {
     @select(s => s.shop.products) products;
+
+    constructor() {}
 
     ngOnInit() {
 

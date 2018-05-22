@@ -18,10 +18,10 @@ class TransactionResource extends JsonResource
         return [
             'id' =>$this->id,
             'amount' => $this->amount,
-            'discount' => $this->discount_amount,
+            'discount' => $this->discount,
             'type' => $this->type,
             'item' => $this->product,
-            'date' => $this->created_at->toDateString()
+            'date' => $this->created_at->toDateTimeString()
         ];
     }
 }

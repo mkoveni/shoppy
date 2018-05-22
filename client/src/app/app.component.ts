@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
       this.authService.getApiUser().subscribe(response => {
         this.authService.setAuthState(true);
         this.authService.setUser(response);
-      });
+      }, error => this.authService.removeToken());
 
       this.productService.getProducts().subscribe( products => {
 

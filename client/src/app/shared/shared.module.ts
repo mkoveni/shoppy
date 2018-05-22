@@ -6,15 +6,19 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AuthenticatedGuard, GuestGuard } from '../guards/guards';
 
+import { ToastyModule } from 'ng2-toasty';
+import { MessageService } from '../services/message.service';
+
 
 
 @NgModule({
   imports: [
-  CommonModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    ToastyModule.forRoot()
   ],
   declarations: [],
   exports: [
@@ -22,8 +26,9 @@ import { AuthenticatedGuard, GuestGuard } from '../guards/guards';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    ToastyModule
   ],
-  providers: [AuthenticatedGuard, GuestGuard]
+  providers: [AuthenticatedGuard, GuestGuard, MessageService]
 })
 export class SharedModule { }

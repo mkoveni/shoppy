@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { tassign } from 'tassign';
 import { INTENDED_ROUTE } from '../../constants';
 import { Router } from '@angular/router';
+import { MessageService } from '../../services/message.service';
 
 @Component({
     selector: 'app-auth-login',
@@ -15,7 +16,8 @@ import { Router } from '@angular/router';
 export class AuthLoginComponent extends BaseComponent implements OnInit
 {
 
-    constructor(formBuilder: FormBuilder, private auth: AuthService, private router: Router) {
+    constructor(formBuilder: FormBuilder, private auth: AuthService,
+       private router: Router, private message: MessageService    ) {
       super(formBuilder);
     }
 
@@ -50,8 +52,12 @@ export class AuthLoginComponent extends BaseComponent implements OnInit
             this.router.navigateByUrl(route);
             return;
         }
+
+        this.router.navigateByUrl('/profile/account');
+
       });
 
-      this.router.navigateByUrl('/profile/account');
+      this.message.success('Login', 'You have successfully signed in');
+
     }
 }

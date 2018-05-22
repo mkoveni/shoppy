@@ -5,6 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { visitAll } from '@angular/compiler';
 import { UniqueValidationProvider } from '../../validators/providers';
 import { Router } from '@angular/router';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-auth-register',
@@ -16,7 +17,7 @@ export class AuthRegisterComponent extends BaseComponent implements OnInit {
   private uniqueValidator: UniqueValidationProvider;
 
   constructor(formBuilder: FormBuilder, validatorProvider: UniqueValidationProvider,
-    private authService: AuthService, private router: Router) {
+    private authService: AuthService, private router: Router, private message: MessageService) {
     super(formBuilder);
 
     this.uniqueValidator = validatorProvider;
@@ -40,8 +41,15 @@ export class AuthRegisterComponent extends BaseComponent implements OnInit {
       this.authService.setUser(res['data']);
       this.authService.saveToken(res['meta']['token']);
 
+      this.message.setOption('timeout', 10000);
+      this.message.success('Hooray!', 'Welcome on board, hope you will have a good time here');
+
       this.router.navigateByUrl('/login');
+    }, error => {
+        this.message.error('ERROR', 'could not register your account, please try again');
     });
+
+    this.form.reset();
   }
 
 
