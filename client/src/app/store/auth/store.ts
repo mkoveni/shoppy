@@ -10,8 +10,10 @@ export interface IAuthState
 export interface User
 {
     id: number;
-    name: string;
+    first_name: string;
+    last_name: string;
     email: string;
+    credit: number;
 }
 
 export const INITIAL_AUTH_STATE: IAuthState = {
@@ -38,3 +40,11 @@ export function authReducer (state: IAuthState = INITIAL_AUTH_STATE, action): IA
     return state;
 
 }
+
+export const INITIAL_USER_STATE: User = {
+  id: null,
+  first_name: null,
+  last_name: null,
+  email: null,
+  credit: null
+};

@@ -1,10 +1,10 @@
 <div class="row">
-  <div class="col-3" *ngFor="let product of products; index as i">
+  <div class="col-3" *ngFor="let product of (products | async);">
     <img class="card-img-top" src="{{ product.image }}" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{ product.name }};</h5>
-      <p class="card-text">{{ product.image }}</p>
-      <a href="#" class="btn btn-primary">Buy Product</a>
+      <p class="card-text">{{ product.description }} | <strong>R{{ product.price }}</strong></p>
+      <a [routerLink]="['/shop/buy/product', product.id]" class="btn btn-primary">Buy Product</a>
     </div>
   </div>
   {{ i }}

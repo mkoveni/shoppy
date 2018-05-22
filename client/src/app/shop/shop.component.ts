@@ -1,6 +1,7 @@
 import { Product } from './../product/product';
 import { ProductService } from './../services/product.service';
 import { Component, OnInit } from '@angular/core';
+import { select } from 'ng2-redux';
 
 @Component({
   selector: 'app-shop',
@@ -8,14 +9,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shop.component.css']
 })
 export class HomeComponent implements OnInit {
-    products: Product[];
-    constructor(private productService: ProductService) { }
+    @select(s => s.shop.products) products;
 
     ngOnInit() {
-        this.productService.getProducts().subscribe( products => {
-            this.products = products;
 
-        });
     }
 
 }

@@ -14,8 +14,9 @@
 
               <ng-template *ngIf="(authenticated | async);then auth else noAuth"></ng-template>
               <ng-template #auth>
-                  <li><a href="" class="nav-link">Balace({{ (user | async)?.credit }})</a></li>
-                  <li><a href="" class="nav-link"><strong>{{ (user | async)?.first_name }}</strong></a></li>
+                  <li><a routerLink="/profile/account" class="nav-link">Account</a></li>
+                  <li><p class="nav-link">Balance (R{{ (user | async)?.credit }})</p></li>
+                  <li><strong class="nav-link">{{ (user | async)?.first_name }}</strong></li>
                   <li><a routerLink="" class="nav-link" (click)="logout()">logout</a></li>
 
               </ng-template>

@@ -4,6 +4,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { TransactionService } from '../../../services/transaction.service';
 import { select } from 'ng2-redux';
 import 'rxjs/add/operator/single';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { User } from '../../../store/auth/store';
 
 
 @Component({
@@ -15,6 +17,8 @@ export class TopupsComponent extends BaseComponent implements OnInit {
 
   @select(s => s.auth.user) user;
 
+  authUser = new BehaviorSubject<User>(null);
+
   type: {};
 
   constructor(builder: FormBuilder, private transactService: TransactionService) {
@@ -25,6 +29,8 @@ export class TopupsComponent extends BaseComponent implements OnInit {
 
     this.initialForm();
 
+    this.user.subscribe(user => this.authUser.next(user));
+
     this.transactService.getTopupType().subscribe(res => {
       this.type = res;
         console.log(this.type);
@@ -33,7 +39,7 @@ export class TopupsComponent extends BaseComponent implements OnInit {
 
   submit() {
 
-    this.transactService.topup(this.input('amount'), this.type['id'], this.user.single().id)
+    this.transactService.topup(this.input('amount'), this.type['id'], this.authUser.getValue().id)
       .subscribe(res => console.log(res));
   }
 
