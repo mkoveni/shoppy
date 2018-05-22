@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+  <div class="container">
+      <a class="navbar-brand" href="#">
+          App
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <ul class="navbar-nav ml-auto">
+              <li><a routerLink="/shop" class="nav-link">Shop</a></li>
+
+              <ng-template *ngIf="(authenticated | async);then auth else noAuth"></ng-template>
+              <ng-template #auth>
+                  <li><a href="" class="nav-link">Balace({{ (user | async)?.credit }})</a></li>
+                  <li><a href="" class="nav-link"><strong>{{ (user | async)?.first_name }}</strong></a></li>
+                  <li><a routerLink="" class="nav-link" (click)="logout()">logout</a></li>
+
+              </ng-template>
+              <ng-template #noAuth>
+                  <li><a routerLink="/login" class="nav-link">Sign in</a></li>
+                  <li><a routerLink="/register"class="nav-link">Sign up</a></li>
+              </ng-template>
+
+          </ul>
+      </div>
+  </div>
+</nav>

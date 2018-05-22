@@ -1,0 +1,13 @@
+<?php
+
+namespace App;
+
+const TRANSACTION_TOPUP = 'TOPUP';
+
+const TRANSACTION_PURCHASE = 'PURCHASE';
+
+const DISCOUNT_LEVEL_1 = 0;
+
+const DISCOUNT_LEVEL_2 = 0.25;
+
+const DISCOUNT_LEVEL_3 = 0.50;

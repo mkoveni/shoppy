@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+.panel-dark{
+    border: .5px solid #ccc;
+}
+.panel-dark .panel-heading {
+    background-color: #222222;
+    color: #C69C6D;
+}

@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-3">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-9">
+    <div class="card">
+      <div class="card-header bg-primary text-light">Account topup</div>
+
+      <div class="card-body">
+
+        <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+          <div class="form-group row">
+            <label for="amount" class="col-sm-4 col-form-label text-md-right">Recharge Amount</label>
+            <div class="col-md-6">
+              <input id="amount" type="text" name="amount" class="form-control"
+              [ngClass]="{ 'is-invalid': error('amount')}" formControlName="amount"
+                required autofocus>
+              <span class="invalid-feedback" *ngIf="error('amount')">
+                <strong>Amount must be a positive number (e.g 20 or 30.46)</strong>
+              </span>
+            </div>
+          </div>
+
+
+          <div class="form-group row mb-0">
+            <div class="col-md-8 offset-md-4">
+              <button type="submit" [disabled]="!form.valid" class="btn btn-primary">
+                Recharge
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
