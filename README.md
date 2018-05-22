@@ -28,7 +28,7 @@ The frontend project was build using Angular 4 (also know as just Angular). this
 ***
 ## REQUIREMENTS
 ***
-These following is need to successfully run this projects
+The following is needed to successfully run these projects
 
 - PHP 7.1+
 - Nodejs
